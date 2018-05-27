@@ -1,15 +1,15 @@
-#include<stdio.h>
+п»ї#include<stdio.h>
 #include<stdlib.h>
 #define Pul_Size 30*1024
 
-char* pul;			/*Вершина пула*/
+char* pul;			/*Р’РµСЂС€РёРЅР° РїСѓР»Р°*/
 typedef struct Hole_inf{
 	char* ptr;
 	int size;
 	} Hinf;
-char* Fhole;			/*Вершина списка "дыр"*/
+char* Fhole;			/*Р’РµСЂС€РёРЅР° СЃРїРёСЃРєР° "РґС‹СЂ"*/
 
-/*Выделение памяти под пул и настройка вершины списка "дыр" на начало пула*/
+/*Р’С‹РґРµР»РµРЅРёРµ РїР°РјСЏС‚Рё РїРѕРґ РїСѓР» Рё РЅР°СЃС‚СЂРѕР№РєР° РІРµСЂС€РёРЅС‹ СЃРїРёСЃРєР° "РґС‹СЂ" РЅР° РЅР°С‡Р°Р»Рѕ РїСѓР»Р°*/
 int init_pul()
 {
 
@@ -28,7 +28,7 @@ char* GetMem(int raz)
     char* Lhole1;
 	char* npos1;
 
-    /*Поиск первой подходящей*/
+    /*РџРѕРёСЃРє РїРµСЂРІРѕР№ РїРѕРґС…РѕРґСЏС‰РµР№*/
 	while(npos!=NULL){
 		if(((Hinf*)Lhole)->size<raz){
 			Lhole=npos;
@@ -37,7 +37,7 @@ char* GetMem(int raz)
 		else break;
  	}
  	
-     /*Поиск следующей походящей*/
+     /*РџРѕРёСЃРє СЃР»РµРґСѓСЋС‰РµР№ РїРѕС…РѕРґСЏС‰РµР№*/
 	if(npos!=NULL){
         Lhole1=Lhole;
         Lhole=npos;
@@ -58,7 +58,7 @@ char* GetMem(int raz)
                 }
             }while(npos!=NULL);
     }
-	/*Подходит ли она по размеру*/
+	/*РџРѕРґС…РѕРґРёС‚ Р»Рё РѕРЅР° РїРѕ СЂР°Р·РјРµСЂСѓ*/
 	if(((Hinf*)Lhole)->size<raz){
 		puts("No memory for pul");
 		exit(1);
@@ -66,19 +66,19 @@ char* GetMem(int raz)
 
 	if(((Hinf*)Lhole)->size>raz){
 
-		/*Разбиваем и Удаляем подходящую "дырку" из списка*/
+		/*Р Р°Р·Р±РёРІР°РµРј Рё РЈРґР°Р»СЏРµРј РїРѕРґС…РѕРґСЏС‰СѓСЋ "РґС‹СЂРєСѓ" РёР· СЃРїРёСЃРєР°*/
 
 		if(Lhole!=Fhole){
 
-			/*Ищем ближайшую верхнюю "дыру" от Lhole*/
+			/*РС‰РµРј Р±Р»РёР¶Р°Р№С€СѓСЋ РІРµСЂС…РЅСЋСЋ "РґС‹СЂСѓ" РѕС‚ Lhole*/
 			npos=Fhole;
 			while(((Hinf*)npos)->ptr!=Lhole)
 npos=((Hinf*)npos)->ptr;
 
-			/*переписываем ее указатель*/
+			/*РїРµСЂРµРїРёСЃС‹РІР°РµРј РµРµ СѓРєР°Р·Р°С‚РµР»СЊ*/
 			((Hinf*)npos)->ptr=Lhole+sizeof(Hinf)+raz;
 
-			/*вставляем оставшийся "кусок" в список*/
+			/*РІСЃС‚Р°РІР»СЏРµРј РѕСЃС‚Р°РІС€РёР№СЃСЏ "РєСѓСЃРѕРє" РІ СЃРїРёСЃРѕРє*/
 			npos=Lhole+sizeof(Hinf)+raz;
 			((Hinf*)npos)->ptr=((Hinf*)Lhole)->ptr;
 			((Hinf*)npos)->size=((Hinf*)Lhole)->size-raz-sizeof(Hinf);
@@ -86,14 +86,14 @@ npos=((Hinf*)npos)->ptr;
 
 		}
 		else{
-			/*Переписываем вершину списка*/
+			/*РџРµСЂРµРїРёСЃС‹РІР°РµРј РІРµСЂС€РёРЅСѓ СЃРїРёСЃРєР°*/
 			Fhole+=sizeof(Hinf)+raz;
 			((Hinf*)Fhole)->ptr=((Hinf*)Lhole)->ptr;
 			((Hinf*)Fhole)->size=((Hinf*)Lhole)->size-raz-sizeof(Hinf);
 			((Hinf*)Lhole)->size=raz;
 		}
 	}
-	/*Если размеры "дыры" и запрашиваемой памяти равны */
+	/*Р•СЃР»Рё СЂР°Р·РјРµСЂС‹ "РґС‹СЂС‹" Рё Р·Р°РїСЂР°С€РёРІР°РµРјРѕР№ РїР°РјСЏС‚Рё СЂР°РІРЅС‹ */
 	else{
 		if(Lhole!=Fhole){
 			npos=Fhole;
@@ -116,26 +116,26 @@ void FreeMem(char* pr)
 	char* lpos=((Hinf*)Fhole)->ptr;
 
 	if(pr<Fhole){
-		/*Ищем смежную снизу "дыру"*/
+		/*РС‰РµРј СЃРјРµР¶РЅСѓСЋ СЃРЅРёР·Сѓ "РґС‹СЂСѓ"*/
 		if((pr+sizeof(Hinf)+((Hinf*)pr)->size)==Fhole){
 			((Hinf*)pr)->ptr=((Hinf*)Fhole)->ptr;
 			((Hinf*)pr)->size+=((Hinf*)Fhole)-> size+sizeof(Hinf);
 			Fhole=pr;
 		}
-		/*Если нет смежных дыр*/
+		/*Р•СЃР»Рё РЅРµС‚ СЃРјРµР¶РЅС‹С… РґС‹СЂ*/
 		else{
 			((Hinf*)pr)->ptr=Fhole;
 			Fhole=pr;
 		}
 	}
 	else{
-		/*Ищем между каких "дырок" лежит pr*/
+		/*РС‰РµРј РјРµР¶РґСѓ РєР°РєРёС… "РґС‹СЂРѕРє" Р»РµР¶РёС‚ pr*/
 		while((lpos<pr)&&(lpos!=NULL)){
 			hpos=lpos;
 			lpos=((Hinf*)hpos)->ptr;
 		}
 		if(lpos!=NULL){
-			/*Верхняя смежная или верхняя и нижняя смежные*/
+			/*Р’РµСЂС…РЅСЏСЏ СЃРјРµР¶РЅР°СЏ РёР»Рё РІРµСЂС…РЅСЏСЏ Рё РЅРёР¶РЅСЏСЏ СЃРјРµР¶РЅС‹Рµ*/
 			if((hpos+sizeof(Hinf)+((Hinf*)hpos)->size)==pr){
 				((Hinf*)hpos)-> size+=sizeof(Hinf)+((Hinf*)pr)->size;
 				pr=hpos;
@@ -145,7 +145,7 @@ void FreeMem(char* pr)
 				}
 				return;
 			}
-			/*Нижняя смежная*/
+			/*РќРёР¶РЅСЏСЏ СЃРјРµР¶РЅР°СЏ*/
 			else{
 				if((pr+sizeof(Hinf)+((Hinf*)pr)-> size)==lpos){
 					((Hinf*)pr)->ptr=((Hinf*)lpos)->ptr;
@@ -154,7 +154,7 @@ void FreeMem(char* pr)
 				}
 				return;
 			}
-			/*Если нет смежных "дыр"*/
+			/*Р•СЃР»Рё РЅРµС‚ СЃРјРµР¶РЅС‹С… "РґС‹СЂ"*/
 			((Hinf*)hpos)->ptr=pr;
 			((Hinf*)pr)->ptr=lpos;
 		}
