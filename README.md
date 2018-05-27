@@ -1,1 +1,1 @@
-test readme ууу
+study
