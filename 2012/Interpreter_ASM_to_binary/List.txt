@@ -1,0 +1,26 @@
+
+Metka: 	Operator: BEGIN	Operand: 1000	Comment: 
+
+Metka: FIRST	Operator: LDA	Operand: KC	Comment: 
+
+Metka: 	Operator: MUL	Operand: KD	Comment:    Comment1
+
+
+Metka: 	Operator: ADD	Operand: KB	Comment: 
+
+Metka: 	Operator: STA	Operand: PA	Comment:    Comment3
+
+
+Metka: 	Operator: HLT	Operand: 	Comment: 
+
+Metka: PA	Operator: RW	Operand: 1	Comment:  Comment4
+
+
+Metka: KB	Operator: DW	Operand: 2	Comment:  Comment5
+
+
+Metka: KC	Operator: DW	Operand: 3	Comment: 
+
+Metka: KD	Operator: DW	Operand: 4	Comment: 
+
+Metka: 	Operator: END	Operand: FIRST	Comment:    Comment

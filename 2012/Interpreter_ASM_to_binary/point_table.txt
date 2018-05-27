@@ -1,0 +1,6 @@
+Name	Value	State
+FIRST	1000	1
+KC	1015	1
+KD	1018	1
+KB	1012	1
+PA	100f	1
